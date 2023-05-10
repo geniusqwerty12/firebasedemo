@@ -12,7 +12,6 @@ class PlantsScreen extends StatefulWidget {
 }
 
 class _PlantsScreenState extends State<PlantsScreen> {
-
   FirestoreData? fireData;
 
   // If you want your list to stay,
@@ -36,7 +35,7 @@ class _PlantsScreenState extends State<PlantsScreen> {
     //     setState(() { });
     //   }
 
-    // });    
+    // });
   }
 
   @override
@@ -50,14 +49,15 @@ class _PlantsScreenState extends State<PlantsScreen> {
       body: FutureBuilder(
         future: fireData!.getPlants(),
         builder: (context, snapshot) {
-          if(snapshot.connectionState == ConnectionState.done) {
-             print(snapshot.data);
+          if (snapshot.connectionState == ConnectionState.done) {
+            print(snapshot.data);
             //  return Container();
             return ListView.builder(
               itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) => _buildPlantTile(snapshot.data![index]),
+              itemBuilder: (context, index) =>
+                  _buildPlantTile(snapshot.data![index]),
             );
-          } else if(snapshot.connectionState == ConnectionState.waiting) {
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: CircularProgressIndicator(),
             );
@@ -66,7 +66,6 @@ class _PlantsScreenState extends State<PlantsScreen> {
               child: Text("Cannot fetch data due to error"),
             );
           }
-         
         },
       ),
 
